@@ -11,7 +11,7 @@ const SignUpPage = () => {
   return (
     <AuthContainer>
       <div>
-        <ACLogoIcon />
+        <img src={ACLogoIcon} />
       </div>
       <h1>建立您的帳號</h1>
 
