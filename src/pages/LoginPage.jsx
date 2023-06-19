@@ -3,15 +3,15 @@ import {
   AuthInputContainer,
   AuthButton,
   AuthLinkText,
-} from 'components/common/auth.styled';
-import { ACLogoIcon } from 'assets/images';
-import { AuthInput } from 'components';
+} from '../components/common/auth.styled';
+import ACLogoIcon from '../assets/images/ac-logo.svg';
+import AuthInput from '../components/AuthInput';
 
 const LoginPage = () => {
   return (
     <AuthContainer>
       <div>
-        <ACLogoIcon />
+        <img src={ACLogoIcon} />
       </div>
       <h1>登入 Todo</h1>
 
