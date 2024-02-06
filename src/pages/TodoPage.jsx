@@ -2,6 +2,8 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import TodoCollection from '../components/TodoCollection';
 import TodoInput from '../components/TodoInput';
+import { useState } from 'react';
+
 
 // eslint-disable-next-line no-unused-vars
 const dummyTodos = [
@@ -28,15 +30,57 @@ const dummyTodos = [
 ];
 
 const TodoPage = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [todos, setTodos] = useState(dummyTodos);
+  
+  const handleChange = (value) => {
+    setInputValue(value);
+  };
+  const handleAddTodo = () => {
+    if (inputValue.length === 0) {
+      return;
+    }
+    setTodos((prevTodos) => {
+      return [
+        ...prevTodos,
+        {
+          id: Math.random() * 100,
+          title: inputValue,
+          isDone: false,
+        },
+      ];
+    });
+    setInputValue('');
+  };
+  const handleKeyDown = () => {
+    if (inputValue.length === 0) {
+      return;
+    }
+    setTodos((prevTodos) => {
+      return [
+        ...prevTodos,
+        {
+          id: Math.random() * 100,
+          title: inputValue,
+          isDone: false,
+        },
+      ];
+    });
+    setInputValue('');
+  };
   return (
     <div>
       TodoPage
       <Header />
-      <TodoInput />
-      <TodoCollection />
+      <TodoInput
+        inputValue={inputValue}
+        onChange={handleChange}
+        onAddTodo={handleAddTodo}
+        onKeyDown={handleKeyDown}
+      />
+      <TodoCollection todos={todos} />
       <Footer />
     </div>
   );
 };
-
 export default TodoPage;
