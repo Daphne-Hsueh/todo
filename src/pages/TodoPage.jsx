@@ -82,6 +82,41 @@ const TodoPage = () => {
       });
     });
   };
+
+  const handleChangeMode = ({id, isEdit}) => {
+    setTodos((prevTodos)=>{
+      return prevTodos.map(todo => {
+        if(todo.id === id){
+          return{
+            ...todo, isEdit
+          }
+        }
+        return{...todo, isEdit:false}
+      })
+    })
+  }
+
+  const handleSave = ({id, title})=> {
+    setTodos(prevTodos => {
+      return prevTodos.map(todo => {
+        if(todo.id === id){
+          return {
+            ...todo, 
+            title,
+            isEdit: false,
+          }
+        }
+        return todo;
+      })
+    })
+  }
+
+  const handleDelete = (id) => {
+    setTodos(todos.filter(todo=> todo.id !== id))
+  }
+
+  const remain = todos.length
+
   return (
     <div>
       TodoPage
@@ -92,8 +127,14 @@ const TodoPage = () => {
         onAddTodo={handleAddTodo}
         onKeyDown={handleKeyDown}
       />
-      <TodoCollection todos={todos} onToggleDone={handleToggleDone} />
-      <Footer />
+      <TodoCollection 
+        todos={todos} 
+        onToggleDone={handleToggleDone} 
+        onChangeMode={handleChangeMode}
+        onSave={handleSave}
+        onDelete={handleDelete}
+      />
+      <Footer remain={remain}/>
     </div>
   );
 };
